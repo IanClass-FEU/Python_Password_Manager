@@ -150,7 +150,7 @@ def add_password():
     messagebox.showinfo("Success", "Password saved successfully!")
     display_passwords()
 
-# GUI setup
+#GUI
 root = tk.Tk()
 root.title("Password Manager")
 root.geometry("400x500")
