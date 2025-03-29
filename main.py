@@ -1,4 +1,6 @@
 import tkinter as tk
+from tkinter import PhotoImage
+from PIL import Image, ImageTk  # If using PNG, JPG, etc.
 from tkinter import ttk, messagebox, Toplevel, Label, Entry, Button
 from auth import login, register_user
 from password_manager import load_passwords, save_password, copy_password, edit_password
@@ -13,8 +15,20 @@ class PasswordManager:
         self.login_screen()
 
     def login_screen(self):
+
         for widget in self.root.winfo_children():
             widget.destroy()
+            
+        login_frame = tk.Frame(self.root, bg="#2C2F33")
+        login_frame.pack(pady=20)
+    
+        image = Image.open("./logopy.png")  # Supports PNG, JPG, etc.
+        image = image.resize((850, 200))  # Resize if needed
+        self.login_image = ImageTk.PhotoImage(image)  # Convert to Tkinter format
+
+        # Create a Label widget for the image
+        image_label = tk.Label(self.root, image=self.login_image, bg="#2C2F33")  # Match background color
+        image_label.pack(pady=10)  # Adjust spacing
         
         tk.Label(self.root, text="Username:", bg="#2C2F33", fg="white").pack()
         self.username_entry = tk.Entry(self.root, bg="#3C3F41", fg="white", insertbackground="white", highlightthickness=2, highlightbackground="white")
@@ -24,8 +38,26 @@ class PasswordManager:
         self.password_entry = tk.Entry(self.root, show="*", bg="#3C3F41", fg="white", insertbackground="white", highlightthickness=2, highlightbackground="white")
         self.password_entry.pack()
         
-        tk.Button(self.root, text="Login", command=self.try_login, bg="#2C2F33", fg="white", borderwidth=2, highlightbackground="white").pack()
-        tk.Button(self.root, text="Register", command=self.register_screen, bg="#2C2F33", fg="white", borderwidth=2, highlightbackground="white").pack()
+        border_thickness = 1  # Adjust this for thicker borders
+
+        frame = tk.Frame(self.root, bg="white", highlightbackground="white", highlightthickness=border_thickness)
+        frame.pack(pady=5)
+
+        button = tk.Button(frame, text="Login", command=self.try_login, 
+                   bg="#2C2F33", fg="white", borderwidth=0, relief="flat",
+                   activebackground="#2C2F33")
+        button.pack(padx=border_thickness, pady=border_thickness)  # Matches the border thickness
+
+
+        border_thickness = 1  # Adjust for a thicker border
+
+        frame_register = tk.Frame(self.root, bg="white", highlightbackground="white", highlightthickness=border_thickness)
+        frame_register.pack(pady=5)
+
+        button_register = tk.Button(frame_register, text="Register", command=self.register_screen, 
+                            bg="#2C2F33", fg="white", borderwidth=0, relief="flat",
+                            activebackground="#2C2F33")
+        button_register.pack(padx=border_thickness, pady=border_thickness)
 
     def try_login(self):
         user_id = login(self.username_entry.get(), self.password_entry.get())
@@ -54,8 +86,26 @@ class PasswordManager:
         self.gender_dropdown = ttk.Combobox(self.root, textvariable=self.gender_var, values=gender_options, state="readonly")
         self.gender_dropdown.pack()
 
-        tk.Button(self.root, text="Register", command=self.try_register, bg="#2C2F33", fg="white", borderwidth=2, highlightbackground="white").pack()
-        tk.Button(self.root, text="Back", command=self.login_screen, bg="#2C2F33", fg="white", borderwidth=2, highlightbackground="white").pack()
+        border_thickness = 1  # Adjust thickness as needed
+
+        frame_register = tk.Frame(self.root, bg="white", highlightbackground="white", highlightthickness=border_thickness)
+        frame_register.pack(pady=5)
+
+        button_register = tk.Button(frame_register, text="Register", command=self.try_register, 
+                            bg="#2C2F33", fg="white", borderwidth=0, relief="flat",
+                            activebackground="#2C2F33")
+        button_register.pack(padx=border_thickness, pady=border_thickness)
+
+        border_thickness = 1  # Adjust for desired border thickness
+
+        frame_back = tk.Frame(self.root, bg="white", highlightbackground="white", highlightthickness=border_thickness)
+        frame_back.pack(pady=5)
+
+        button_back = tk.Button(frame_back, text="Back", command=self.login_screen, 
+                        bg="#2C2F33", fg="white", borderwidth=0, relief="flat",
+                        activebackground="#2C2F33")
+        button_back.pack(padx=border_thickness, pady=border_thickness)
+
 
     def try_register(self):
         success = register_user(
