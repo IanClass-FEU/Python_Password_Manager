@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import PhotoImage
-from PIL import Image, ImageTk  # If using PNG, JPG, etc.
+from PIL import Image, ImageTk 
 from tkinter import ttk, messagebox, Toplevel, Label, Entry, Button
 from auth import login, register_user
 from password_manager import load_passwords, save_password, copy_password, edit_password
@@ -11,7 +11,7 @@ class PasswordManager:
         self.root = root
         self.root.title("Password Manager")
         self.current_user = None
-        self.root.configure(bg="#2C2F33")  # Dark background
+        self.root.configure(bg="#2C2F33") 
         self.login_screen()
 
     def login_screen(self):
@@ -22,13 +22,13 @@ class PasswordManager:
         login_frame = tk.Frame(self.root, bg="#2C2F33")
         login_frame.pack(pady=20)
     
-        image = Image.open("./logopy.png")  # Supports PNG, JPG, etc.
-        image = image.resize((850, 200))  # Resize if needed
-        self.login_image = ImageTk.PhotoImage(image)  # Convert to Tkinter format
+        image = Image.open("./logopy.png")  
+        image = image.resize((850, 200)) 
+        self.login_image = ImageTk.PhotoImage(image)  
 
-        # Create a Label widget for the image
-        image_label = tk.Label(self.root, image=self.login_image, bg="#2C2F33")  # Match background color
-        image_label.pack(pady=10)  # Adjust spacing
+      
+        image_label = tk.Label(self.root, image=self.login_image, bg="#2C2F33")  
+        image_label.pack(pady=10) 
         
         tk.Label(self.root, text="Username:", bg="#2C2F33", fg="white").pack()
         self.username_entry = tk.Entry(self.root, bg="#3C3F41", fg="white", insertbackground="white", highlightthickness=2, highlightbackground="white")
@@ -38,7 +38,7 @@ class PasswordManager:
         self.password_entry = tk.Entry(self.root, show="*", bg="#3C3F41", fg="white", insertbackground="white", highlightthickness=2, highlightbackground="white")
         self.password_entry.pack()
         
-        border_thickness = 1  # Adjust this for thicker borders
+        border_thickness = 1  
 
         frame = tk.Frame(self.root, bg="white", highlightbackground="white", highlightthickness=border_thickness)
         frame.pack(pady=5)
@@ -46,11 +46,10 @@ class PasswordManager:
         button = tk.Button(frame, text="Login", command=self.try_login, 
                    bg="#2C2F33", fg="white", borderwidth=0, relief="flat",
                    activebackground="#2C2F33")
-        button.pack(padx=border_thickness, pady=border_thickness)  # Matches the border thickness
+        button.pack(padx=border_thickness, pady=border_thickness)  
 
 
-        border_thickness = 1  # Adjust for a thicker border
-
+        border_thickness = 1  
         frame_register = tk.Frame(self.root, bg="white", highlightbackground="white", highlightthickness=border_thickness)
         frame_register.pack(pady=5)
 
@@ -86,7 +85,7 @@ class PasswordManager:
         self.gender_dropdown = ttk.Combobox(self.root, textvariable=self.gender_var, values=gender_options, state="readonly")
         self.gender_dropdown.pack()
 
-        border_thickness = 1  # Adjust thickness as needed
+        border_thickness = 1  
 
         frame_register = tk.Frame(self.root, bg="white", highlightbackground="white", highlightthickness=border_thickness)
         frame_register.pack(pady=5)
@@ -96,7 +95,7 @@ class PasswordManager:
                             activebackground="#2C2F33")
         button_register.pack(padx=border_thickness, pady=border_thickness)
 
-        border_thickness = 1  # Adjust for desired border thickness
+        border_thickness = 1  
 
         frame_back = tk.Frame(self.root, bg="white", highlightbackground="white", highlightthickness=border_thickness)
         frame_back.pack(pady=5)
